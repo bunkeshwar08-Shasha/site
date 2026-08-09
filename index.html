@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo-yellow.png" />
+
+    <title>Bunkeshwar Retreats — Bunking on life, feeling alive</title>
+    <meta name="description" content="Not a retreat. A game. Four days in Rishikesh for ten hand-picked solo strangers — a currency, secret Moles, a nightly banishing circle, and a camera that never blinks. Applications only." />
+
+    <meta property="og:title" content="Bunkeshwar Retreats — Not a retreat. A game." />
+    <meta property="og:description" content="Ten solo strangers. Four days in Rishikesh. A currency, a secret Mole, and a nightly vote. Applications open." />
+    <meta property="og:image" content="/og.png" />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <!-- Applies the saved theme before React mounts, so there's no flash of
+         the wrong colours. Defaults to LIGHT on a first visit. -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem("bunkeshwar-theme");
+        var t = ["light", "dark", "yellow"].indexOf(saved) > -1 ? saved : "light";
+        document.documentElement.setAttribute("data-theme", t);
+        var bar = { light: "#FFFFFF", dark: "#0B0A08", yellow: "#FFD100" }[t];
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute("content", bar);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
