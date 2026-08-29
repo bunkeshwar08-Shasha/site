@@ -35,8 +35,8 @@ export default function Sponsors() {
 
         <div className="grid3" style={{ margin: "30px 0" }}>
           <Card title="Who's in the room">
-            10–12 solo travellers per batch, screened and cast by hand — mixed on age,
-            background and nationality. High-intent, high-energy, and there by choice.
+            Twelve solo travellers per batch, screened and cast by hand — mixed on age,
+            background and personality. High-intent, high-energy, and there by choice.
           </Card>
           <Card title="What gets made">
             Every batch produces one trailer and one full retreat film, plus stills and
