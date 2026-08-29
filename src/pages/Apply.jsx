@@ -15,7 +15,7 @@ export default function Apply() {
           Apply.<br />Don't just book.
         </h1>
         <p style={{ fontSize: 18, maxWidth: 720, marginTop: 16 }}>
-          Ten strangers in a house for four days is intimate, so every batch runs through a
+          Twelve strangers in a house for four days is intimate, so every batch runs through a
           short application first. It takes about ten minutes. There are no right answers —
           we're balancing a room, not ranking people.
         </p>

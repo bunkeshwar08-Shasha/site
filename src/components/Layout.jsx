@@ -78,7 +78,7 @@ export default function Layout({ children }) {
             <div>
               <div className="kicker">{BRAND.tagline}</div>
               <p className="fine" style={{ marginTop: 8 }}>
-                {BRAND.location} · Solo travellers only · 10–12 per batch
+                {BRAND.location} · Solo travellers only · 12 per batch
               </p>
             </div>
             <img src={logo} alt="" />
