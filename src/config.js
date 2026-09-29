@@ -1,26 +1,20 @@
 // ---------------------------------------------------------------------------
 // FORM DELIVERY
 //
-// Default: FormSubmit (https://formsubmit.co) — completely free, no signup,
-// no dashboard and NO API KEY. Submissions are emailed straight to the address
-// below.
+// Web3Forms is the default provider for this site because FormSubmit has been
+// intermittently returning 500 errors for this address. Create a free account at
+// https://web3forms.com and paste your access key into the .env file below.
 //
-// The only setup step: submit any form on the site once. FormSubmit sends a
-// one-time confirmation email to bunkeshwar08@gmail.com — click the link in it,
-// and every submission from then on lands in that inbox. You only do this once.
-//
-// Optional hardening: after activating, FormSubmit gives you a random string
-// you can use instead of the raw email address, so your address isn't visible
-// in the page source. Paste it into FORM_ENDPOINT_ID below if you want that.
+// Copy .env.example to .env and set VITE_WEB3FORMS_KEY to your real key.
 // ---------------------------------------------------------------------------
-export const FORM_PROVIDER = "formsubmit"; // "formsubmit" | "web3forms"
+export const FORM_PROVIDER = "web3forms"; // "formsubmit" | "web3forms"
 
-// Leave empty to post to the email address directly, or paste the random
-// string FormSubmit gives you after activation (e.g. "a1b2c3d4e5f6...").
+// Optional: if you choose to keep FormSubmit instead, leave this empty to post to
+// the raw email address directly, or paste the random string FormSubmit gives you
+// after activation (e.g. "a1b2c3d4e5f6...").
 export const FORM_ENDPOINT_ID = "";
 
-// Only used if you switch FORM_PROVIDER to "web3forms".
-// Free key (250 submissions/month) from https://web3forms.com
+// Free key (250 submissions/month) from https://web3forms.com.
 export const WEB3FORMS_KEY =
   import.meta.env.VITE_WEB3FORMS_KEY || "";
 

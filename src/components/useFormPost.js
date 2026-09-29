@@ -40,7 +40,9 @@ export default function useFormPost({ subject }) {
     if (FORM_PROVIDER === "web3forms") {
       if (!WEB3FORMS_KEY) {
         setState("error");
-        setMessage("Add your Web3Forms access key in src/config.js first.");
+        setMessage(
+          "Add your Web3Forms access key to .env as VITE_WEB3FORMS_KEY before publishing."
+        );
         return;
       }
       url = "https://api.web3forms.com/submit";
@@ -79,8 +81,10 @@ export default function useFormPost({ subject }) {
       } else {
         setState("error");
         setMessage(
-          json.message ||
-            "Something went wrong. Please try again, or email us directly."
+          json.message === "Server Error"
+            ? "FormSubmit is currently returning a server error. Switch to Web3Forms or try again later."
+            : json.message ||
+              "Something went wrong. Please try again, or email us directly."
         );
       }
     } catch (err) {
