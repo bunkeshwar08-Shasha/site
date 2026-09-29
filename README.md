@@ -13,33 +13,26 @@ React + Vite. Four pages, three forms, all mailing to **bunkeshwar08@gmail.com**
 
 ## 1. Turning the forms on
 
-The forms use **FormSubmit** — free, unlimited, no account, **no API key**.
+The forms now default to **Web3Forms** because FormSubmit is currently returning 500
+errors for this address from the live site. Web3Forms is free for small volumes and
+works well for a static React site.
 
-There is exactly one step, and you do it once:
+1. Create a free account at https://web3forms.com
+2. Copy `.env.example` to `.env`
+3. Paste your access key into `VITE_WEB3FORMS_KEY`
+4. Deploy the site again and submit a form
 
-1. Run the site (see below) or open it once it's live
-2. Fill in any form and hit submit
-3. FormSubmit emails **bunkeshwar08@gmail.com** asking you to confirm — click the link
-
-Done. Every submission from then on lands in that inbox, formatted as a tidy table,
-with a subject line telling you which form it came from:
+The form code remains the same, and each submission is sent to **bunkeshwar08@gmail.com**
+with the subject line telling you which form it came from:
 
 - `New guest application — Bunkeshwar`
 - `New volunteer application — Bunkeshwar`
 - `New sponsor enquiry — Bunkeshwar`
 
-**Optional, recommended once you're live:** after activating, FormSubmit gives you a
-random string you can use instead of your raw email address, so the address isn't sitting
-in your page source for scrapers. Paste it into `FORM_ENDPOINT_ID` in `src/config.js`.
-
-**Set up a Gmail filter** too: filter on the subject containing "Bunkeshwar" and apply a
-label, so applications stay out of your main inbox.
-
-### If you'd rather use Web3Forms
-
-Their free plan does include an access key — 250 submissions/month. If you'd prefer it:
-get a key at web3forms.com, then in `src/config.js` set `FORM_PROVIDER = "web3forms"`
-and paste the key into `WEB3FORMS_KEY`. Nothing else changes.
+If you still want to use FormSubmit instead, set `FORM_PROVIDER = "formsubmit"` in
+`src/config.js` and keep `FORM_ENDPOINT_ID` empty or fill in the random ID FormSubmit gives
+you after activation. The current default is Web3Forms because it is the more reliable
+provider for this project right now.
 
 ---
 
