@@ -78,6 +78,12 @@ export default function useFormPost({ subject }) {
         setState("done");
         form.reset();
         window.scrollTo({ top: 0, behavior: "smooth" });
+        const isGameNight = /game night|daily game pass/i.test(subject || "");
+        setMessage(
+          isGameNight
+            ? "Your daily game pass is booked. Before you head out, confirm the location once: RR Stay & Café, Tapovan, Rishikesh. We’ll see you soon."
+            : "Your form has been sent successfully."
+        );
       } else {
         setState("error");
         setMessage(

@@ -10,6 +10,7 @@ const LINKS = [
   { to: "/apply", label: "Apply" },
   { to: "/volunteer", label: "Volunteer" },
   { to: "/sponsors", label: "Sponsors" },
+  { to: "#game-night", label: "Game Night" },
 ];
 
 export default function Layout({ children }) {
@@ -31,14 +32,18 @@ export default function Layout({ children }) {
           <div className="nav-right">
             <nav className="nav-links">
               {LINKS.map((l) => (
-                <NavLink
-                  key={l.to}
-                  to={l.to}
-                  end={l.to === "/"}
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  {l.label}
-                </NavLink>
+                l.to.startsWith("#") ? (
+                  <a key={l.to} href={l.to} className="nav-anchor">{l.label}</a>
+                ) : (
+                  <NavLink
+                    key={l.to}
+                    to={l.to}
+                    end={l.to === "/"}
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                  >
+                    {l.label}
+                  </NavLink>
+                )
               ))}
             </nav>
             <ThemeToggle />

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { SectionHead, Card, Kicker } from "../components/Bits";
 import { useTheme } from "../components/ThemeToggle";
+import useFormPost from "../components/useFormPost";
 import { BRAND } from "../config";
 
 const THREADS = [
@@ -22,6 +23,9 @@ const DAYS = [
 
 export default function Home() {
   const { logo } = useTheme();
+  const guestForm = useFormPost({
+    subject: "Game Night Pass Request — Bunkeshwar",
+  });
 
   return (
     <>
@@ -34,18 +38,174 @@ export default function Home() {
             <span className="outline">Feeling alive.</span>
           </h1>
           <p className="lede">
-            Retreats for people who'd rather feel alive than be well — designed to be
-            played, not attended. Four days in {BRAND.location} with twelve hand-picked
-            solo strangers, a currency, two secret Moles and a camera that never blinks.
+            The next batch is now open for everyday guests and corporate groups who want to
+            experience the game in person. Creator Season 1 episodes are coming soon to YouTube
+            and Instagram, and the creator version remains exclusive to the original experience.
           </p>
           <div style={{ marginTop: 30 }}>
-            <span className="pill">Solo travellers only</span>
-            <span className="pill">Screened &amp; cast by hand</span>
-            <span className="pill">Every batch filmed</span>
+            <span className="pill">Next batch now open</span>
+            <span className="pill">Corporate groups welcome</span>
+            <span className="pill">Creator version exclusive</span>
           </div>
           <div style={{ marginTop: 30, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
-            <Link className="btn" to="/apply">Apply to a batch</Link>
-            <a className="btn ghost" href="#the-game">See how it works</a>
+            <Link className="btn" to="/apply">Apply now</Link>
+            <a className="btn ghost" href="#game-night">Book game night</a>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------- game night */}
+      <section className="alt" id="game-night">
+        <div className="wrap">
+          <SectionHead
+            kicker="Separate from the retreat"
+            title={<>Bunkeshwar Game Night<br />Tapovan, Rishikesh</>}
+            lede="This is a daily social game night, not part of the 4-day retreat application or batch process. Every evening, 7:00 PM–10:00 PM. Three games, cash prizes, new people every night. Payment is collected at the venue only — no online checkout needed."
+          />
+
+          <div className="game-pass-grid">
+            <div className="game-pass-copy">
+              <div className="pass-card highlights">
+                <div className="pass-price">Daily game night</div>
+                <div className="pass-price small">Tapovan · 7:00 PM</div>
+                <ul className="xlist">
+                  <li><span>✦</span>Pictionary</li>
+                  <li><span>✦</span>Memory Test</li>
+                  <li><span>✦</span>Mafia</li>
+                  <li><span>✦</span>Cash prizes every round</li>
+                </ul>
+              </div>
+
+              <div className="pass-card">
+                <h3>What to expect</h3>
+                <p>
+                  Bored in Tapovan? Come play. Every evening at RR Stay &amp; Café we run
+                  three games, two rounds each. Solo travellers are welcome, and teams are
+                  made on the spot. New games and experiences keep getting added, so no two
+                  nights are the same.
+                </p>
+                <div className="mini-meta">
+                  <span>Venue: RR Stay &amp; Café, Tapovan</span>
+                  <span>Call: +91 89201 01994</span>
+                  <span>Instagram: @bunkeshwarretreats</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="pass-card booking-box">
+              <div className="booking-header">
+                <span className="kicker">Guest details</span>
+                <h3>Book your game night pass</h3>
+              </div>
+
+              <form className="form" onSubmit={guestForm.submit}>
+                <div className="row">
+                  <div className="field">
+                    <label htmlFor="full-name">Full name</label>
+                    <input id="full-name" name="Full name" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="phone">WhatsApp / phone</label>
+                    <input id="phone" name="Phone" required placeholder="+91 ..." />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="field">
+                    <label htmlFor="email">Email</label>
+                    <input id="email" name="Email" type="email" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="pass-type">Pass type</label>
+                    <select id="pass-type" name="Pass type" required defaultValue="">
+                      <option value="" disabled>Select</option>
+                      <option value="1 round — ₹100">1 Round — ₹100</option>
+                      <option value="Daily Game Pass — ₹500">Daily Game Pass — ₹500</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="field">
+                    <label htmlFor="date">Date</label>
+                    <input id="date" name="Date" type="date" required />
+                  </div>
+                  <div className="field">
+                    <label htmlFor="guests">Number of guests</label>
+                    <input id="guests" name="Guests" type="number" min="1" max="20" defaultValue="1" required />
+                  </div>
+                </div>
+
+                <div className="field">
+                  <label htmlFor="group">Group details</label>
+                  <textarea id="group" name="Group details" placeholder="Add names of friends/teammates if you're booking together" rows="3" />
+                </div>
+
+                <div className="field">
+                  <label htmlFor="notes">Notes</label>
+                  <textarea id="notes" name="Notes" placeholder="Any timing preference or special request" rows="3" />
+                </div>
+
+                <div className="venue-note">
+                  This is separate from the 4-day retreat. Before you head out, confirm the location once: RR Stay &amp; Café, Tapovan, Rishikesh.
+                </div>
+
+                <button className="btn" type="submit" disabled={guestForm.state === "sending"}>
+                  {guestForm.state === "sending" ? "Sending..." : "Book my daily pass"}
+                </button>
+
+                {guestForm.state !== "idle" && guestForm.message && (
+                  <div className={guestForm.state === "done" ? "form-status success" : "form-status error"}>
+                    {guestForm.message}
+                  </div>
+                )}
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------- next batch */}
+      <section>
+        <div className="wrap">
+          <SectionHead
+            kicker="Now accepting bookings"
+            title={<>Next batch is open<br />for guests &amp; groups.</>}
+            lede="We are now opening the next round for everyday guests and corporate groups who want to experience the full 3-day Who's the Mole experience. Creator Season 1 episodes are being prepared for release soon on YouTube and Instagram, and the creator edition remains distinct from the paid guest experience."
+          />
+          <div className="grid3">
+            <Card n="01" title="For travellers">
+              New guest batches are now open for people who want to experience the full retreat as a player, not just as an audience member.
+            </Card>
+            <Card n="02" title="For teams">
+              Corporate groups and private teams can now apply for the same experience with the right group fit and final agreement in place.
+            </Card>
+            <Card n="03" title="Content &amp; release">
+              Final films for paid guests and corporate groups will not be released on YouTube or Instagram without prior confirmation from the group. The creator version stays exclusive.
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* -------------------------------------------------------- why we do it */}
+      <section className="alt">
+        <div className="wrap">
+          <SectionHead
+            kicker="Why we do it"
+            title={<>A night for strangers<br />to become a table.</>}
+            lede="We run the game because people are more alive when they stop scrolling, start playing and let a room decide who they are. It is a low-pressure way to meet people, laugh at the right moment, and leave with a story instead of a screen full of unread messages."
+          />
+          <div className="grid3">
+            <Card n="01" title="Low pressure">
+              Come alone, meet fast and make friends without needing a plan. The room does half the work.
+            </Card>
+            <Card n="02" title="Real energy">
+              Play, laugh, accuse, guess and lose track of time. That is the whole point.
+            </Card>
+            <Card n="03" title="A good night out">
+              No forced networking, no awkward speeches. Just games, cash prizes, and a night people remember.
+            </Card>
           </div>
         </div>
       </section>
@@ -130,11 +290,11 @@ export default function Home() {
           <SectionHead kicker="04 · The Fine Print" title="What you're signing up for." />
           <div className="price">
             <div>
-              <div className="amt">{BRAND.price}</div>
-              <div className="sub">Per person · all-inclusive</div>
+              <div className="amt">Now open</div>
+              <div className="sub">Next retreat batch accepting applications</div>
             </div>
             <div className="meta">
-              4 Days / 3 Nights<br />
+              3 Day experience<br />
               {BRAND.location}
             </div>
           </div>
@@ -186,7 +346,7 @@ export default function Home() {
             <Link className="btn" to="/apply">Start your application</Link>
           </div>
           <div style={{ marginTop: 18 }}>
-            <span className="pill">Applications open now · dates dropping soon</span>
+            <span className="pill">Normal guests · corporate groups · applications open now</span>
           </div>
         </div>
       </section>
